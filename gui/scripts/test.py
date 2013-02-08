@@ -12,6 +12,7 @@
 import wx
 import roslib
 import rospy
+import serial
 
 class MyFrame(wx.Frame):
     def __init__(self, parent, id, title):
@@ -39,6 +40,10 @@ class MyApp(wx.App):
 
 def main():
     rospy.init_node('gui')
+    ser = serial.Serial('/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A8008FpQ-if00-port0', 9600)
+    x = ser.read() #read a byte
+    print "read ", x
+    ser.close()
     app = MyApp(0)
     app.MainLoop()
 
